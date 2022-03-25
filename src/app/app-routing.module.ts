@@ -1,0 +1,53 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthuserGuard } from './guards/authuser.guard';
+
+import { HomeComponent } from './home/home.component';
+
+import { LoginComponent } from './login/login/login.component';
+import { Login1Component } from './login1/login1.component';
+import { AddComponent } from './User-management/add/add.component';
+import { EditComponent } from './User-management/edit/edit.component';
+import { ListComponent } from './User-management/list/list.component';
+
+
+const routes: Routes = [
+  {
+    path: '' , component: Login1Component, pathMatch: 'full'
+  },
+  {
+    path: 'login' , component: Login1Component
+  },
+  {
+    path: 'home' , component: HomeComponent
+  },
+
+  // {
+  //   path: 'User' , component: UserComponent
+  // },
+  // {
+  //   path: 'list' , component: ListComponent,
+  // },
+
+  // {
+  //   path: 'edit' , component: EditComponent,
+  // }
+
+  {
+    path: 'add' , component: AddComponent,
+  },
+  {
+    path: 'edit' , component: EditComponent,
+  },
+  {
+    path: 'list' , component: ListComponent,
+  },
+
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
