@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login/login.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthorizationCheckService } from './services/authorization-check.service';
 import { httpInterceptor } from './services/Interceptor/httpInterceptor';
@@ -13,10 +12,6 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { Login1Component } from './login1/login1.component';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './services/user.service';
-// import { UserComponent } from './User/user.component';
-// import { ListComponent } from './list/list.component';
-// import { EditComponent } from './edit/edit.component';
-
 import { AddComponent } from './User-management/add/add.component';
 import { EditComponent } from './User-management/edit/edit.component';
 import { ListComponent } from './User-management/list/list.component';
@@ -36,7 +31,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     Login1Component,
     HomeComponent,
     // UserComponent,

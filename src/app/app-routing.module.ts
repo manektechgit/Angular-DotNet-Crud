@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthuserGuard } from './guards/authuser.guard';
 
 import { HomeComponent } from './home/home.component';
-
-import { LoginComponent } from './login/login/login.component';
 import { Login1Component } from './login1/login1.component';
 import { AddComponent } from './User-management/add/add.component';
 import { EditComponent } from './User-management/edit/edit.component';
@@ -21,17 +19,6 @@ const routes: Routes = [
   {
     path: 'home' , component: HomeComponent
   },
-
-  // {
-  //   path: 'User' , component: UserComponent
-  // },
-  // {
-  //   path: 'list' , component: ListComponent,
-  // },
-
-  // {
-  //   path: 'edit' , component: EditComponent,
-  // }
 
   {
     path: 'add' , component: AddComponent,
