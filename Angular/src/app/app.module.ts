@@ -23,7 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerModule } from 'ng2-datepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+import { DatePipe } from '@angular/common'
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -55,6 +57,7 @@ export function tokenGetter() {
     DatepickerModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
+    NgxPaginationModule,Ng2SearchPipeModule ,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -66,8 +69,8 @@ export function tokenGetter() {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true },
-    AuthorizationCheckService, AuthenticationService,UserService
+    AuthorizationCheckService, AuthenticationService,UserService,DatePipe
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }

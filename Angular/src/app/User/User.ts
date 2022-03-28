@@ -3,7 +3,7 @@ export class User{
   userName:string;
   userEmail:string;
   userPassword:string;
-  userDOB: any;
+  userDOB: Date;
 
 
   constructor(){
@@ -11,7 +11,7 @@ export class User{
       this.userName = "";
       this.userEmail = "";
       this.userPassword = "";
-      this.userDOB = "";
+      this.userDOB = new Date;
 
   }
 

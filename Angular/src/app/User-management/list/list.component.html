@@ -3,6 +3,9 @@
 <div>
   <a routerLink="/home" type="button" class="btn btn-primary" style="float:right;" >Back</a>
 </div>
+  <div class="col-sm-5" style="padding-top:20px;padding-bottom:20px;" >
+       <input class="form-control" type="text" placeholder="Search......." >
+  </div>
 <table  class="table table-striped">
     <thead>
         <tr>
@@ -15,12 +18,12 @@
           <th scope="col"> Delete </th>
     </thead>
     <tbody>
-        <tr *ngFor="let todo of Todos  | paginate: config">
+        <tr *ngFor="let todo of Todos |filter:userId | paginate: config">
             <th scope="row">{{todo.userId}}</th>
             <td>{{todo.userName | titlecase}}</td>
             <td>{{todo.userEmail}}</td>
             <!-- <td>{{todo.userPassword|password }}</td> -->
-            <td>{{todo.userDOB }}</td>
+            <td>{{todo.userDOB| date: 'dd/MM/yyyy' }}</td>
             <td><a routerLink="/edit" [queryParams]="{id: todo.userId }" class="btn btn-primary"  >Edit</a></td>
            <!-- <td> <button (click)="deleteTodo(todo.userId)"  class="btn btn-primary">Delete</button></td> -->
           <td>   <button (click)="deleteTodo(todo.userId)" class="btn btn-sm btn-danger btn-delete-user" >

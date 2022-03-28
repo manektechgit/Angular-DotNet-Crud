@@ -47,9 +47,10 @@
             DOB required.
         </div>
       </div> -->
+
        <div class="">
       <input type="text" class="form-control" formControlName="UserDOB" placeholder="Datepicker" bsDatepicker formControlName="date" />
-      <pre *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB}}</pre>
+      <pre *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB|date: 'dd/MM/yyyy' }}</pre>
 
     </div>
 

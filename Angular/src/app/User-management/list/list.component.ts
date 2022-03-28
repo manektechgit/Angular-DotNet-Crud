@@ -6,14 +6,6 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User/User';
 import Swal from 'sweetalert2';
 Swal
-// import {Observable, of} from 'rxjs';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/switchMap';
-
-// interface IServerResponse {
-//     items: string[];
-//     total: number;
-// }
 
 @Component({
   selector: 'app-list',
@@ -23,9 +15,10 @@ Swal
 export class ListComponent implements OnInit {
 
   userId = "0";
- // Todos: User[] | null = null;
-  Todos!: User[];
+ Todos: User[] =[];
+  //Todos!: User[];
   data:any;
+ // Users:User []| null = null;
 
     config: any;
     collection = [];
@@ -88,32 +81,32 @@ export class ListComponent implements OnInit {
 }
 
 
-alertConfirmation()
-{
-  Swal.fire({
-    position: 'top-end',
-    title: 'Are you sure?',
-    text: 'This process is irreversible.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, go ahead.',
-    cancelButtonText: 'No, let me think'
-  }).then((result) => {
-    if (result.value) {
-      Swal.fire(
-        'Removed!',
-        'Item removed successfully.',
-        'success'
-      )
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-      Swal.fire(
-        'Cancelled',
-        'Item is safe.)',
-        'error'
-      )
-    }
-  })
-}
+// alertConfirmation()
+// {
+//   Swal.fire({
+//     position: 'top-end',
+//     title: 'Are you sure?',
+//     text: 'This process is irreversible.',
+//     icon: 'warning',
+//     showCancelButton: true,
+//     confirmButtonText: 'Yes, go ahead.',
+//     cancelButtonText: 'No, let me think'
+//   }).then((result) => {
+//     if (result.value) {
+//       Swal.fire(
+//         'Removed!',
+//         'Item removed successfully.',
+//         'success'
+//       )
+//     } else if (result.dismiss === Swal.DismissReason.cancel) {
+//       Swal.fire(
+//         'Cancelled',
+//         'Item is safe.)',
+//         'error'
+//       )
+//     }
+//   })
+// }
 
 
 pageChange(newPage: number) {

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User/User';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common'
 ;
 
 @Component({
@@ -29,7 +30,7 @@ export class AddComponent implements OnInit {
 
   );
 
-  constructor(private user: UserService, private fb: FormBuilder,   private router:Router,) {
+  constructor(private user: UserService, private fb: FormBuilder,   private router:Router,public datepipe: DatePipe) {
     this.User = new User()
    }
 
@@ -38,6 +39,9 @@ export class AddComponent implements OnInit {
 
 
   ngOnInit(): void {
+    var ddMMyyyy = this.datepipe.transform(new Date(),"dd-MM-yyyy");
+    console.log(ddMMyyyy); //output - 14-02-2019
+
     this.EmpForm = this.fb.group({
       date: null,
       range: null
@@ -59,21 +63,38 @@ export class AddComponent implements OnInit {
     // })
 
   }
+  myFunction(){
+    this.User.userDOB=new Date();
+    let latest_date =this.datepipe.transform(this.EmpForm.value.userDOB, 'MM-dd-yyy');
+    console.log(this.User.userDOB, 'MM-dd-yyy');
+   }
+
+
+
+
 
   saveTodo() {
+    debugger;
     this.submitted = true;
 
      if (this.EmpForm.invalid) {
             return;
      }
+   // this.user.postData(this.EmpForm.value).subscribe(res => {
+       if(this.User.userEmail!=null)
+       {
+       this.user.postData(this.EmpForm.value).subscribe(res => {
+        Swal.fire("Data Save Scuessfully", 'success')
+        this.data = res;
+        this.router.navigate(["list"]);
+        this.resetFrom();
+       })
+      }
 
-   //  if(confirm("Are you sure to saeve")) {
-    this.user.postData(this.EmpForm.value).subscribe(res => {
-      Swal.fire("Data Save Scuessfully", 'success')
-      this.data = res;
-      this.router.navigate(["list"]);
-      this.resetFrom();
-    })
+      else
+      {
+        Swal.fire("Please Insert your Valid EmilId", 'Info')
+      }
 
   }
 

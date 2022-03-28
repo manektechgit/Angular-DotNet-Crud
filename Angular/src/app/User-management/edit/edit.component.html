@@ -38,8 +38,11 @@
 
     <div>
       <label>DOb</label>
-      <input type="text" id="userDOB" class="form-control" formControlName="userDOB"  [(ngModel)] = User.userDOB/>
+      <input  type="text" id="userDOB" class="form-control" formControlName="userDOB"  [(ngModel)] = User.userDOB/>
+
       <div *ngIf="EmpForm.controls['userDOB'].invalid && EmpForm.controls['userDOB'].touched" class="alert alert-danger">
+        <div *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB|date: 'dd/MM/yyyy' }}</div>
+
         <div *ngIf="EmpForm.controls['userDOB'].errors">
           DOB is required.
       </div>
