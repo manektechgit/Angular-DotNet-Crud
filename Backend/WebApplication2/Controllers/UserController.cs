@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.DBContext;
@@ -52,18 +53,68 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] User obj)
         {
-            var data = UserDetails.User.Add(obj);
+            //var data = UserDetails.User.Add(obj);
 
-            UserDetails.SaveChanges();
+            //UserDetails.SaveChanges();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var isEmailAlreadyExists = UserDetails.User.Any(x => x.UserEmail == obj.UserEmail);
+                   
+                    if (isEmailAlreadyExists)
+                    {
+                        ModelState.AddModelError("Email", "User with this email already exists");
+                    }
+                    User newobj = new User();
+                    newobj.UserName = obj.UserName;
+                    newobj.UserEmail = obj.UserEmail;
+                    newobj.UserPassword = obj.UserPassword;
+
+                    DateTime UserDOB = new DateTime();
+                    string strDate = UserDOB.ToString("dd/MM/yyyy");
+                    newobj.UserDOB = obj.UserDOB;
+
+                    UserDetails.User.Add(newobj);
+                    UserDetails.SaveChanges();
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(HttpContext.Response.StatusCode, " email already exists");
+            }
             return Ok();
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] User obj)
         {
-            var data = UserDetails.User.Update(obj);
-            UserDetails.SaveChanges();
+            try
+            {
+
+
+                if (ModelState.IsValid)
+                {
+                    var isEmailAlreadyExists = UserDetails.User.Any(x => x.UserEmail == obj.UserEmail);
+                    if (isEmailAlreadyExists)
+                    {
+                        ModelState.AddModelError("Email", "User with this email already exists");
+                    }
+                    var data = UserDetails.User.Update(obj);
+                    UserDetails.SaveChanges();
+                    return Ok();
+                }
+               
+            }
+            catch (Exception ex)
+                {
+
+                return StatusCode(HttpContext.Response.StatusCode, " email already exists");
+            }
             return Ok();
+
         }
 
         [HttpDelete("{id}")]
