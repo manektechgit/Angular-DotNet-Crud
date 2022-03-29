@@ -16,8 +16,10 @@ export class ListComponent implements OnInit {
 
   userId = "0";
  Todos: User[] =[];
+ term!: string;
   //Todos!: User[];
   data:any;
+
  // Users:User []| null = null;
 
     config: any;
@@ -29,7 +31,7 @@ export class ListComponent implements OnInit {
     private router:Router) {
       this.config = {
         currentPage: 1,
-        itemsPerPage: 5
+        itemsPerPage: 10
   };
   this.activeRoute.queryParamMap
             .pipe(map((params: { get: (arg0: string) => any; }) => params.get('page')))
