@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { first, map } from 'rxjs';
+import { AuthenticationServiceService } from 'src/app/services/authentication-service.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User/User';
 import Swal from 'sweetalert2';
@@ -24,10 +25,10 @@ export class ListComponent implements OnInit {
 
     config: any;
     collection = [];
-
+    isLogedin=false;
   constructor(private todoSvc:UserService,
 
-    private activeRoute:ActivatedRoute,
+    private activeRoute:ActivatedRoute,private loginSvc:AuthenticationServiceService,
     private router:Router) {
       this.config = {
         currentPage: 1,
@@ -81,7 +82,12 @@ export class ListComponent implements OnInit {
   }
 
 }
-
+logout(){
+  // this.router.navigate(["home"])
+  this.router.navigateByUrl("/login");
+  this.isLogedin = false;
+  this.loginSvc.Logout();
+}
 
 // alertConfirmation()
 // {

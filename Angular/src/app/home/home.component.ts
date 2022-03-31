@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationServiceService } from '../services/authentication-service.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   isLogedin=false;
   constructor(private loginSvc:AuthenticationServiceService,
+    private authenticationService: AuthenticationService,
               private jwtHellper:JwtHelperService,
               private router:Router) {
    }
@@ -30,11 +32,14 @@ export class HomeComponent implements OnInit {
     this.isLogedin = this.loginSvc.LoginStatus();
   }
 
-  logout(){
-    // this.router.navigate(["home"])
-    this.router.navigateByUrl("/login");
-    this.isLogedin = false;
-    this.loginSvc.Logout();
+  // logout(){
+  //   // this.router.navigate(["home"])
+  //   this.router.navigateByUrl("/login");
+  //   this.isLogedin = false;
+  //   this.loginSvc.Logout();
+  // }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
   }
-
 }

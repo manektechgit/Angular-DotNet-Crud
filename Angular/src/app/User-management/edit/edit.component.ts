@@ -16,6 +16,7 @@ export class EditComponent implements OnInit {
   User:User ;
   EventValue: any = "Save";
   data:any;
+  today=new Date();
   EmpForm = new FormGroup(
     {
       UserId: new FormControl(null),
@@ -27,6 +28,7 @@ export class EditComponent implements OnInit {
     }
 
   );
+  errorMessage: any;
   constructor(private user: UserService,  private formBuilder: FormBuilder ,
      private router:Router, private activeRoute:ActivatedRoute,) {
    this.User = new User()
@@ -61,20 +63,46 @@ export class EditComponent implements OnInit {
 
   }
 
-  saveTodo() {
-    this.submitted = true;
-     if (this.EmpForm.invalid) {
-            return;
-     }
-     debugger
-     this.user.putData(this.userId,this.EmpForm.value).subscribe(res => {
-      Swal.fire("Data Update Scuessfully")
-      this.data = res;
-      this.router.navigate(["list"]);
-      this.resetFrom();
-    })
+//   saveTodo() {
+//     this.submitted = true;
+//      if (this.EmpForm.invalid) {
+//             return;
+//      }
+//      debugger
+//      this.user.putData(this.userId,this.EmpForm.value).subscribe(res => {
+//       Swal.fire("Data Update Scuessfully")
+//       this.data = res;
+//       this.router.navigate(["list"]);
+//       this.resetFrom();
+//     })
 
-}
+// }
+
+saveTodo() {
+  this.submitted = true;
+   if (this.EmpForm.invalid) {
+          return;
+   }
+     if(this.User.userEmail!=null)
+     {
+      this.user.putData(this.userId,this.EmpForm.value).
+      subscribe({
+      next: data => {
+          Swal.fire("Data Update Scuessfully")
+          this.data = data;
+       this.router.navigate(["list"]);
+        this.resetFrom();
+        },
+        error: error => {
+            this.errorMessage = error.message;
+            Swal.fire("This email already exists")
+            console.error('There was an error! ', error);
+        }
+      })
+     }
+    }
+
+
  resetFrom()
 {
 

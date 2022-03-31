@@ -5,8 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthenticationService } from './services/authentication.service';
-import { AuthorizationCheckService } from './services/authorization-check.service';
 import { httpInterceptor } from './services/Interceptor/httpInterceptor';
 import { JwtModule } from "@auth0/angular-jwt";
 import { Login1Component } from './login1/login1.component';
@@ -26,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { DatePipe } from '@angular/common'
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -58,6 +57,7 @@ export function tokenGetter() {
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     NgxPaginationModule,Ng2SearchPipeModule ,
+    Ng2SmartTableModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -68,8 +68,7 @@ export function tokenGetter() {
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true },
-    AuthorizationCheckService, AuthenticationService,UserService,DatePipe
+    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true },UserService,DatePipe
   ],
   bootstrap: [AppComponent,]
 })

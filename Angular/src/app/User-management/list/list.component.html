@@ -1,7 +1,11 @@
+<br>
+<button type="button" class=" btn btn-info" (click)="logout()"style="float:right;">Logout</button>
 <h1>User List</h1>
+
 <a routerLink="/add" type="button" class="btn btn-primary">Add User</a>
 <div>
   <a routerLink="/home" type="button" class="btn btn-primary" style="float:right;" >Back</a>
+
 </div>
   <div class="col-sm-5" style="padding-top:20px;padding-bottom:20px;" >
        <input class="form-control" type="text" placeholder="Search......."  [(ngModel)]="term" >

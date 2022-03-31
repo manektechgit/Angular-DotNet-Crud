@@ -28,6 +28,10 @@
         </div>
       </div>
 
+      <div *ngIf="emailAlredyExist != ''" class="alert alert-danger">
+        {{emailAlredyExist}}
+      </div>
+
       <div>
           <label>Password</label>
           <input type="password" id="UserPassword" class="form-control" formControlName="UserPassword"  [(ngModel)] = User.userPassword/>
@@ -49,7 +53,7 @@
       </div> -->
 
        <div class="">
-      <input type="text" class="form-control" formControlName="UserDOB" placeholder="Datepicker" bsDatepicker formControlName="date" />
+      <input type="text" class="form-control" formControlName="UserDOB" placeholder="Datepicker" bsDatepicker formControlName="date" [minDate]="" [maxDate]="today" />
       <pre *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB|date: 'dd/MM/yyyy' }}</pre>
 
     </div>

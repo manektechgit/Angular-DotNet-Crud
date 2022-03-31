@@ -38,7 +38,7 @@
 
     <div>
       <label>DOb</label>
-      <input  type="text" id="userDOB" class="form-control" formControlName="userDOB"  [(ngModel)] = User.userDOB/>
+      <input  type="text" id="userDOB" class="form-control" formControlName="userDOB"  [(ngModel)] = User.userDOB />
 
       <div *ngIf="EmpForm.controls['userDOB'].invalid && EmpForm.controls['userDOB'].touched" class="alert alert-danger">
         <div *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB|date: 'dd/MM/yyyy' }}</div>
@@ -47,6 +47,10 @@
           DOB is required.
       </div>
     </div>
+    <!-- <div class="">
+      <input type="text" class="form-control" formControlName="UserDOB" placeholder="Datepicker" bsDatepicker formControlName="date" [minDate]="" [maxDate]="today" />
+      <pre *ngIf="EmpForm.value.userDOB" class="code-preview">{{EmpForm.value.userDOB|date: 'dd/MM/yyyy' }}</pre>
+    </div> -->
   </div>
   <br>
   <div class="form-group">

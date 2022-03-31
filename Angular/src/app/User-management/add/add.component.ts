@@ -5,8 +5,7 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/User/User';
 import Swal from 'sweetalert2';
-import { DatePipe } from '@angular/common'
-;
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add',
@@ -17,6 +16,8 @@ export class AddComponent implements OnInit {
   maxDate = new Date();
   User:User ;
   data:any;
+  emailAlredyExist = "";
+  today=new Date();
 
   EmpForm = new FormGroup(
     {
@@ -29,6 +30,7 @@ export class AddComponent implements OnInit {
     }
 
   );
+  errorMessage: any;
 
   constructor(private user: UserService, private fb: FormBuilder,   private router:Router,public datepipe: DatePipe) {
     this.User = new User()
@@ -39,8 +41,8 @@ export class AddComponent implements OnInit {
 
 
   ngOnInit(): void {
-    var ddMMyyyy = this.datepipe.transform(new Date(),"dd-MM-yyyy");
-    console.log(ddMMyyyy); //output - 14-02-2019
+    // var ddMMyyyy = this.datepipe.transform(new Date(),"dd-MM-yyyy");
+    // console.log(ddMMyyyy); //output - 14-02-2019
 
     this.EmpForm = this.fb.group({
       date: null,
@@ -63,11 +65,7 @@ export class AddComponent implements OnInit {
     // })
 
   }
-  myFunction(){
-    this.User.userDOB=new Date();
-    let latest_date =this.datepipe.transform(this.EmpForm.value.userDOB, 'MM-dd-yyy');
-    console.log(this.User.userDOB, 'MM-dd-yyy');
-   }
+
 
 
 
@@ -80,24 +78,58 @@ export class AddComponent implements OnInit {
      if (this.EmpForm.invalid) {
             return;
      }
-   // this.user.postData(this.EmpForm.value).subscribe(res => {
+
        if(this.User.userEmail!=null)
        {
-       this.user.postData(this.EmpForm.value).subscribe(res => {
-        Swal.fire("Data Save Scuessfully", 'success')
-        this.data = res;
-        this.router.navigate(["list"]);
-        this.resetFrom();
-       })
+        this.user.postData(this.EmpForm.value).
+        subscribe({
+          next: data => {
+            debugger;
+
+            Swal.fire("Data Save Scuessfully")
+            this.data = data;
+         this.router.navigate(["list"]);
+          this.resetFrom();
+          },
+          error: error => {
+              this.errorMessage = error.message;
+              Swal.fire("This email already exists")
+
+              console.error('There was an error! ', error);
+          }
+        })
+       }
       }
+      //  this.user.postData(this.EmpForm.value).subscribe(res => {
+      //   Swal.fire("Data Save Scuessfully", 'success')
+      //   this.data = res;
+      //   this.router.navigate(["list"]);
+      //   this.resetFrom();
+      //  })
+      // }
 
-      else
-      {
-        Swal.fire("Please Insert your Valid EmilId", 'Info')
-      }
+      // else
+      // {
+      //   Swal.fire("Please Insert your Valid EmilId", 'Info')
+      // }
 
-  }
 
+
+  // myFunction(){
+  //   this.User.userDOB=new Date();
+  //   let latest_date =this.datepipe.transform(this.EmpForm.value.userDOB, 'MM-dd-yyy');
+  //   console.log(this.User.userDOB, 'MM-dd-yyy');
+  //  }
+
+
+
+  myFunction(){
+    debugger
+    this.User.userDOB=new Date();
+    let userDOB =this.datepipe.transform(this.User.userDOB, 'yyyy-MM-dd');
+    console.log(this.User.userDOB, 'yyyy-MM-dd')
+    console.log("nama")
+   }
 
   resetFrom()
   {

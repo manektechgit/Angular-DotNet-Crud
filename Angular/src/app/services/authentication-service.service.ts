@@ -8,6 +8,7 @@ import {shareReplay,map, retry, catchError} from 'rxjs/operators';
 })
 export class AuthenticationServiceService {
 
+
   isLoggedIn = false;
 
   constructor(private httpClient: HttpClient) { }

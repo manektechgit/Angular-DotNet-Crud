@@ -1,36 +1,51 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  isLoggedIn = false;
-
   constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  // const credentials={
+  //         username:string,
+  //          password:string
+  //        }
 
 
-  login(username: string, password: string) {
-    debugger
-    console.log("nama");
-    debugger;
-   // return this.http.post<any>('/api/Auth/authentication', { username, password })
-       return this.http.post <any>('https://localhost:44321/api/Auth/authentication', {username , password})
+  // let headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+  // headers = headers.set('Host', '<hostname>');
 
-       .pipe(map(user => {
-    // login successful if there's a jwt token in the response
-    if (user && user.token) {
-
-    localStorage.setItem('TokenInfo', JSON.stringify(user));
+  login({ username, password }: { username: string; password: string; }) {
+    if (username == "admin" && password == "admin") {
+      localStorage.setItem('currentUser', "loggedin");
+     // return true;
     }
+  }
 
-    return user;
-    }));
-    }
-    logout() {
-      // remove user from local storage to log user out
-      localStorage.removeItem('TokenInfo');
-      }
+
+
+
+  loginuser(credentials: any){
+    //return this.http.post('https://localhost:44305/api/User',formData);
+    return this.http.post('https://localhost:44305/api/Auth1/login',credentials)
+  }
+
+
+
+
+
+  logout() {
+    localStorage.removeItem('currentUser');
+  }
+
+  public get loggedIn(): boolean {
+    return (localStorage.getItem('currentUser') !== null);
+  }
+
 }
