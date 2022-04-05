@@ -2,10 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/User/User';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
+
 import { DatePipe } from '@angular/common';
+import { UserService } from 'src/app/Services/user.service';
+import Swal from 'sweetalert2';
+import { User } from 'src/app/Services/User';
 
 @Component({
   selector: 'app-add',

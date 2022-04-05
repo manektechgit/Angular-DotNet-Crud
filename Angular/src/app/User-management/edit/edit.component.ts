@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/User/User';
+import { DatePipe } from '@angular/common';
+import { User } from 'src/app/Services/User';
+import { UserService } from 'src/app/Services/user.service';
 import { first } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 

@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { first, map } from 'rxjs';
-import { AuthenticationServiceService } from 'src/app/services/authentication-service.service';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/User/User';
+import { DatePipe } from '@angular/common';
+import { User } from 'src/app/Services/User';
+import { UserService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
-Swal
 
 @Component({
   selector: 'app-list',
@@ -28,7 +27,7 @@ export class ListComponent implements OnInit {
     isLogedin=false;
   constructor(private todoSvc:UserService,
 
-    private activeRoute:ActivatedRoute,private loginSvc:AuthenticationServiceService,
+    private activeRoute:ActivatedRoute,
     private router:Router) {
       this.config = {
         currentPage: 1,
@@ -80,13 +79,15 @@ export class ListComponent implements OnInit {
     this.todoSvc.getData()
 
   }
-
 }
+
+
+
 logout(){
   // this.router.navigate(["home"])
   this.router.navigateByUrl("/login");
   this.isLogedin = false;
-  this.loginSvc.Logout();
+ // this.loginSvc.Logout();
 }
 
 // alertConfirmation()

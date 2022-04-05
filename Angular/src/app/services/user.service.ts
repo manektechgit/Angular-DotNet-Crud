@@ -15,11 +15,11 @@ export class UserService {
 
   getData(){
 
-    return this.http.get('https://localhost:44305/api/User');  //https://localhost:44352/ webapi host url
+    return this.http.get('https://localhost:44336/api/User');  //https://localhost:44352/ webapi host url
   }
 
   postData(formData: any){
-    return this.http.post('https://localhost:44305/api/User',formData);
+    return this.http.post('https://localhost:44336/api/User',formData);
   }
 
   //https://localhost:44305/api/User/4
@@ -27,17 +27,17 @@ export class UserService {
   getDatabyId(id: string)
   {
 
-    return this.http.get('https://localhost:44305/api/User/'+id);
+    return this.http.get('https://localhost:44336/api/User/'+id);
   }
 
 
   putData(userId:string,formData: any){
     debugger
-    return this.http.put('https://localhost:44305/api/User/'+userId,formData);
+    return this.http.put('https://localhost:44336/api/User/'+userId,formData);
   }
   deleteData(id: string){
     debugger
-    return this.http.delete('https://localhost:44305/api/User/'+id);
+    return this.http.delete('https://localhost:44336/api/User/'+id);
   }
 
 }
